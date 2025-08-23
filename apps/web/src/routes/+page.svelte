@@ -16,7 +16,13 @@
     lang: 'en' | 'hi' | 'auto';
   };
 
-  const API_URL = 'http://localhost:8000/api/explain';
+  // Use a public env var in SvelteKit
+  const API_URL = import.meta.env.VITE_API_URL ?? '/api/explain';
+
+  // TEMP: hardcode to confirm connectivity
+  // const API_URL = 'http://localhost:8000/api/explain';
+  console.log('API_URL at runtime:', API_URL);
+
 
   // State
   let text = '';
