@@ -9,6 +9,8 @@ RUN npm ci
 COPY apps/web/. .
 
 # Build with local binary via npm script
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
 
 EXPOSE 5173
