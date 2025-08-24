@@ -10,11 +10,15 @@ services:
     ports:
       - "8000:8000"
     restart: unless-stopped
+    networks:
+      - versequest-network
 
   web:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8000/api/explain
     container_name: versequest-web
     environment:
       - VITE_API_URL=http://localhost:8000/api/explain
@@ -23,3 +27,9 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+    networks:
+      - versequest-network
+
+networks:
+  versequest-network:
+    driver: bridge

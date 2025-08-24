@@ -16,11 +16,12 @@
     lang: 'en' | 'hi' | 'auto';
   };
 
-  // Use a public env var in SvelteKit
-  const API_URL = import.meta.env.VITE_API_URL ?? '/api/explain';
-
-  // TEMP: hardcode to confirm connectivity
-  // const API_URL = 'http://localhost:8000/api/explain';
+  // Use environment variable for API URL
+  const API_URL = import.meta.env.VITE_API_URL;
+  
+  if (!API_URL) {
+    console.error('VITE_API_URL environment variable is not set');
+  }
   console.log('API_URL at runtime:', API_URL);
 
 
