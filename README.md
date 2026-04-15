@@ -1,123 +1,128 @@
-# VerseQuest - AI-Powered Lyrics-to-Meaning Explainer
+# VerseQuest
 
-VerseQuest is an AI-powered web application that helps users understand the deeper meaning behind song lyrics. Using the Perplexity AI API, it provides comprehensive analysis including themes, imagery, cultural references, and more.
+VerseQuest is an AI-backed lyrics analysis application. It pairs a FastAPI backend with a SvelteKit frontend to analyze song lyrics and return structured meaning, themes, imagery, tone, and cultural notes.
 
 ## Features
 
-- Multi-language support:
-  - English lyrics analysis
-  - Hindi lyrics analysis
-  - Auto-language detection
-- Detailed meaning explanation for each line
-- Theme identification and analysis
-- Imagery and metaphor detection
-- Cultural context and references
-- Quick TL;DR summary
-- Song credits and attribution
-- Modern, responsive UI
+- Line-by-line lyric explanation
+- TL;DR song summary
+- Theme and imagery extraction
+- Cultural notes and tone classification
+- FastAPI backend with Perplexity AI integration
+- Responsive SvelteKit frontend
 
-## Tech Stack
+## Tech stack
 
-### Frontend
-- SvelteKit
-- TypeScript
-- Vite
-
-### Backend
-- FastAPI (Python)
-- Perplexity AI API for lyrics analysis
-
-### DevOps
-- Docker
-- Docker Compose
-- GitHub Actions for CI/CD
+- Backend: Python, FastAPI, Uvicorn, requests, python-dotenv
+- Frontend: SvelteKit, Vite, TypeScript
+- Containers: Docker, Docker Compose
 
 ## Prerequisites
 
-- Node.js (v20 or later)
-- Python 3.8 or later
-- Docker and Docker Compose (for containerized setup)
-- Perplexity AI API key
-
-## Getting Started
-
-### Prerequisites
-
-Before you begin, ensure you have the following installed:
-- Node.js v20 or later
-- Python 3.8 or later
-- Docker and Docker Compose (for containerized setup)
+- Node.js 20+
+- Python 3.8+
+- Docker and Docker Compose (optional)
 - A Perplexity AI API key
 
-### Local Development Setup
+## Getting started
+
+### Local development
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/saurabhsingh0990/versequest.git
+   git clone <repository-url>
    cd versequest
    ```
 
-2. Set up the backend:
+2. Install backend dependencies:
    ```bash
    cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
-   pip install -r requirements.txt
+   python3 -m venv .venv
+   source .venv/bin/activate
+   python -m pip install -r requirements.txt
    ```
 
-3. Configure backend environment:
+3. Create the backend environment file:
    ```bash
-   # Create .env file in backend directory
-   echo "PPLX_API_KEY=your_api_key_here" > .env
+   cat > backend/.env <<'EOF'
+   PPLX_API_KEY=your_api_key_here
+   EOF
    ```
 
-4. Start the backend server:
+4. Start the backend service:
    ```bash
    uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
 
-5. Set up the frontend:
+5. Install frontend dependencies:
    ```bash
    cd ../apps/web
    npm install
    ```
 
-6. Configure frontend environment:
-   ```bash
-   # Create .env file in apps/web directory
-   echo "VITE_API_URL=http://localhost:8000/api/explain" > .env
-   ```
-
-7. Start the frontend development server:
+6. Start the frontend:
    ```bash
    npm run dev
    ```
 
-8. Open http://localhost:5173 in your browser
-
-### Docker Deployment
-
-1. Clone the repository (if not already done):
-   ```bash
-   git clone https://github.com/saurabhsingh0990/versequest.git
-   cd versequest
+7. Open the app in your browser:
+   ```text
+   http://localhost:5173
    ```
 
-2. Create environment file:
+### Docker development
+
+1. Create a root `.env` file with your API key:
    ```bash
-   # Create .env file in root directory
-   echo "PPLX_API_KEY=your_api_key_here" > .env
+   cat > .env <<'EOF'
+   PPLX_API_KEY=your_api_key_here
+   EOF
    ```
 
-3. Build and start the containers:
+2. Build and start containers:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
-4. Access the application:
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:8000
+3. Access the application:
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:8000`
 
+## Environment variables
+
+- `PPLX_API_KEY` — required by the backend
+- `VITE_API_URL` — frontend API endpoint, e.g. `http://localhost:8000/api/explain`
+
+## Project structure
+
+```text
+versequest/
+├── apps/web/          # SvelteKit frontend
+│   ├── src/           # Frontend source files
+│   └── static/        # Static assets
+├── backend/           # FastAPI backend
+│   ├── main.py        # API entrypoint
+│   └── requirements.txt
+├── docker-compose.yml # Docker setup
+└── docs/              # Project documentation
+```
+
+## Security
+
+- Keep all API keys and secrets out of version control.
+- `.env` files are ignored by the repository.
+- Use example files or documentation for config templates.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit your changes.
+4. Push and open a pull request.
+
+## License
+
+This project is provided as-is. Add a license file to define terms.
 ### Stopping the Application
 
 - For local development: Press Ctrl+C in both terminal windows
